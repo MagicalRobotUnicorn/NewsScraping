@@ -1,0 +1,27 @@
+{
+  "name": "newsscraping",
+  "version": "1.0.0",
+  "description": "A newsscraping application with a mongodb backend",
+  "main": "sample.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagicalRobotUnicorn/NewsScraping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagicalRobotUnicorn/NewsScraping/issues"
+  },
+  "homepage": "https://github.com/MagicalRobotUnicorn/NewsScraping#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.7.10"
+  }
+}
