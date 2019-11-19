@@ -38,13 +38,25 @@ router.get("/", function(req, res){
 
 router.get("/section/:route", function(req, res){
     const route = `${req.params.route}`;
+    const key = nytimes.key;
+    console.log(key);
     axios({
         method: 'get',
-        url: 'https://api.nytimes.com/svc/topstories/v2/' + route + '.json?api-key=' + nytimes.key,
+        url: 'https://api.nytimes.com/svc/topstories/v2/' + route + '.json?api-key=' + key,
       }).then((response) => {
-        let cheerioObject = $(response);
-        cheerioObject = $(cheerioObject).results;
-        console.log(cheerioObject);
+        let responseArray = [];
+        for (let i = 0; i < response.data.results.length; i++){
+            let individualResponse = {
+            headline : response.data.results[i].title,
+            author : response.data.results[i].byline,
+            summary : response.data.results[i].abstract,
+            url : response.data.results[i].url,
+            thumb : response.data.results[i].multimedia[1].url
+            }
+            individualResponse.id = individualResponse.url.replace(/([:./])/g, '');
+            responseArray.push(individualResponse);
+        }
+        res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : responseArray});
       }).catch(err => {
         console.log('error in section route is: ', err);
       })

@@ -28,7 +28,7 @@ var hbs = exphbs.create({
                 let html = '<div class="col-2.5 sectionDiv">';
                 html += sections[i].icon;
                 html += '<h4 class="sectionHeading">' + sections[i].display + '</h4>';
-                html += '<button type="button" class="btn btn-outline-dark sectionSelection" data-route= "' + sections[i].route + '">Read Section</button>';
+                html += '<button type="button" class="btn btn-outline-dark sectionSelection" data-route="' + sections[i].route + '">Read Section</button>';
         
                 html += '</div>';
                 ++counterVariable;
@@ -50,7 +50,6 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "handlebars");
 
 
 app.use(require("./controllers/application_controller"));

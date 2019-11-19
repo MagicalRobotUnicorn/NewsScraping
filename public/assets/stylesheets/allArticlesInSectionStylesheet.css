@@ -1,0 +1,40 @@
+#siteTitle{
+    font-size: 6em;
+    font-family: 'Alfa Slab One', cursive;
+    margin-left: 7%;
+}
+
+.individualArticle {
+    font-family: 'Playfair Display', serif;
+    width: 100%;
+}
+
+.individualArticle.photoCol {
+    width: 30%;
+    float: right;
+
+}
+
+.individualArticle.contentCol {
+    float: left;
+}
+/* .headline {
+
+}
+
+.author {
+
+}
+
+.summary {
+
+}
+
+.url {
+
+} */
+
+ .articleImage {
+    width: 15%;
+    height: auto;
+ }
