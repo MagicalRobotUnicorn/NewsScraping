@@ -13,8 +13,6 @@ const sections = require("../public/assets/javascript/sectionData");
 router.get("/", function(req, res){
     const handleObject = sections;
 
-    console.log(handleObject.length);
-
     res.render("allSections", {handleObject});
 });
 

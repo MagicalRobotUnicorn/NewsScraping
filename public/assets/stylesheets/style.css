@@ -1,3 +1,8 @@
+.row {
+    margin-left: 12%;
+    margin-right: 7%;
+}
+
 .sectionIcon {
     font-size: 7em;
     margin-top: 10px;
@@ -8,6 +13,8 @@
     display: inline-block;
     margin-left: 25px;
     margin-right: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 150px;
     height: 200px;
     height: auto;
@@ -22,6 +29,55 @@
 
 .sectionHeading {
     font-family: 'Playfair Display', serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
     /* margin-left: 35%;
     margin-right: auto; */
 }
+
+#siteTitle{
+    font-size: 6em;
+    font-family: 'Alfa Slab One', cursive;
+    margin-left: 7%;
+}
+
+#introParagraph {
+    font-family: 'Playfair Display', serif;
+    margin-left: 9%;
+}
+
+#attributionRow {
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 65%;
+    padding: 10px;
+    margin-left: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#attributionParagraph {
+    font-family: 'Playfair Display', serif;
+    float: right;
+    margin-left: 20px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+#attributionLink {
+    display: inline-block;
+}
+
+a #attributionPicture {
+    background-color: grey;
+    border-radius: 5px;
+    /* width: 20%; */
+    height: 45%;
+    width: auto;
+    float: left;
+    margin-left: 80px;
+    margin-right: -20px;
+    margin-top: 20px;
+}
+
+/* font-family: 'Alfa Slab One', cursive;
+font-family: 'Playfair Display', serif; */

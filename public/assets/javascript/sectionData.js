@@ -22,7 +22,7 @@ const sections = [
     {
         display: 'Fashion',
         route: 'fashion',
-        icon: '<i class="fa fa-shirtsinbulk sectionIcon" aria-hidden="true"></i>'
+        icon: '<i class="fa fa-tshirt sectionIcon" aria-hidden="true"></i>'
     },
     {
         display: 'Food',
@@ -35,7 +35,7 @@ const sections = [
         icon: '<i class="fa fa-medkit sectionIcon" aria-hidden="true"></i>'
     },
     {
-        diplay: 'Home',
+        display: 'Home',
         route: 'home',
         icon: '<i class="fa fa-home sectionIcon" aria-hidden="true"></i>'
     },

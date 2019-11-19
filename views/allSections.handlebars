@@ -1,3 +1,20 @@
+<div class="container">
+    <div class="row">
+        <h1 id="siteTitle">All the News...</h1>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <p id="introParagraph">
+                Welcome to the site! Please click on any of the sections to view the content and feel free to comment on any of the stories that you find interesting!
+            </p>
+        </div>
+    </div>
+    <div class="row" id="attributionRow">
+        <p id="attributionParagraph">All data provided by the New York Times API.</p><a href="https://developer.nytimes.com/" target="_blank" id="attributionLink"><img src="./public/assets/images/attributionLogo.png" id="attributionPicture"></a>
+    </div>
+
 {{#formatSections handleObject}}
     {{{totalHtml}}}
 {{/formatSections}}
+
+</div>

@@ -21,11 +21,11 @@ var hbs = exphbs.create({
     helpers: {
         formatSections: function(sections, options) {
             let counterVariable = 0;
-            let totalHtml = "";
+            let totalHtml = '<div class="row">';
 
         
             for (let i = 0; i < sections.length; i++){
-                let html = '<div class="sectionDiv">';
+                let html = '<div class="col-2.5 sectionDiv">';
                 html += sections[i].icon;
                 html += '<h4 class="sectionHeading">' + sections[i].display + '</h4>';
                 html += '<button type="button" class="btn btn-outline-dark sectionSelection" data-route= "' + sections[i].route + '">Read Section</button>';
@@ -33,12 +33,14 @@ var hbs = exphbs.create({
                 html += '</div>';
                 ++counterVariable;
         
-                if (counterVariable === 3){
-                    html += '<div class="lineBreak"></div>';
+                if (counterVariable === 4){
+                    html += '</div><div class="row">';
                     counterVariable = 0;
                 }
                 totalHtml += html;
             }
+            totalHtml += '</div>';
+            
             return options.fn({totalHtml : totalHtml});
         }
     }
