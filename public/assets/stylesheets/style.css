@@ -1,0 +1,27 @@
+.sectionIcon {
+    font-size: 7em;
+    margin-top: 10px;
+
+}
+
+.sectionDiv {
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 150px;
+    height: 200px;
+    height: auto;
+    align-content: center;
+    padding-bottom: 5px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 2px 2px grey;
+    text-align: center;
+}
+
+.sectionHeading {
+    font-family: 'Playfair Display', serif;
+    /* margin-left: 35%;
+    margin-right: auto; */
+}
