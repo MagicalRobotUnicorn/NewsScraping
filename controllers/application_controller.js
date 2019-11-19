@@ -9,11 +9,19 @@ const router = express.Router();
 
 const comment = require("../models/comment");
 const sections = require("../public/assets/javascript/sectionData");
+const oneSection = require("../public/assets/javascript/sample.js");
+
 
 router.get("/", function(req, res){
     const handleObject = sections;
 
     res.render("allSections", {handleObject});
+});
+
+router.get("/oneSection", function(req, res){
+    const handleObject = oneSection;
+
+    res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : handleObject});
 });
 
 module.exports = router;

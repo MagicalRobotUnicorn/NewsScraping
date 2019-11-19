@@ -2550,30 +2550,32 @@ var sampleObject = {
   ]
 }
 
+module.exports = sampleObject;
+
 // console.log(sampleObject.results.length)
 
-var singleObject = sampleObject.results[0];
+// var singleObject = sampleObject.results[0];
 
-// console.log(singleObject);
+// // console.log(singleObject);
 
-var Headline =  singleObject.title;
+// var Headline =  singleObject.title;
 
-var Author = singleObject.byline;
+// var Author = singleObject.byline;
 
-var Summary = singleObject.abstract;
+// var Summary = singleObject.abstract;
 
-var URL = singleObject.url;
+// var URL = singleObject.url;
 
-var LargeThumb = singleObject.multimedia[1].url;
+// var LargeThumb = singleObject.multimedia[1].url;
 
-var projectObject = {
-  Headline,
-  Author,
-  Summary,
-  URL,
-  LargeThumb
-}
+// var projectObject = {
+//   Headline,
+//   Author,
+//   Summary,
+//   URL,
+//   LargeThumb
+// }
 
-console.log (projectObject);
+// console.log (projectObject);
 
 // * Feel free to add more content to your database (photos, bylines, and so on).

@@ -4,6 +4,8 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 const path = require("path");
 
+const nytimes = require("./config/keys");
+
 const app = express();
 
 const PORT = process.env.PORT || 8080;
