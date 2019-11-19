@@ -11,7 +11,11 @@ const comment = require("../models/comment");
 const sections = require("../public/assets/javascript/sectionData");
 
 router.get("/", function(req, res){
-    const handleObject = sections.sections;
+    const handleObject = sections;
 
-    res.render("allSections", handleObject);
+    console.log(handleObject.length);
+
+    res.render("allSections", {handleObject});
 });
+
+module.exports = router;
