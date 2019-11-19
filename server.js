@@ -19,17 +19,18 @@ var hbs = exphbs.create({
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials'),
     helpers: {
-        formatSections: function(sections) {
+        formatSections: function(sections, options) {
             let counterVariable = 0;
             let totalHtml = "";
 
         
             for (let i = 0; i < sections.length; i++){
-                let html = '<div class="sectionDiv>';
+                let html = '<div class="sectionDiv">';
                 html += sections[i].icon;
-                html += '<h4 class="sectionHeading>' + sections[i].display + '</h4>';
-                html += '<button type="button" class="btn btn-outline-dark sectionSelection ' + 'data-route= "' + sections[i].route + ">Read Section</button>";
+                html += '<h4 class="sectionHeading">' + sections[i].display + '</h4>';
+                html += '<button type="button" class="btn btn-outline-dark sectionSelection" data-route= "' + sections[i].route + '">Read Section</button>';
         
+                html += '</div>';
                 ++counterVariable;
         
                 if (counterVariable === 3){
@@ -38,7 +39,7 @@ var hbs = exphbs.create({
                 }
                 totalHtml += html;
             }
-            return totalHtml;
+            return options.fn({totalHtml : totalHtml});
         }
     }
 });
