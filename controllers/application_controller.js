@@ -9,9 +9,7 @@ const router = express.Router();
 const axios = require("axios");
 const $ = require("cheerio");
 
-const comment = require("../models/comment");
 const sections = require("../public/assets/javascript/sectionData");
-const oneSection = require("../public/assets/javascript/sample.js");
 const nytimes = require("../config/keys");
 
 
@@ -39,7 +37,6 @@ router.get("/", function(req, res){
 router.get("/section/:route", function(req, res){
     const route = `${req.params.route}`;
     const key = nytimes.key;
-    console.log(key);
     axios({
         method: 'get',
         url: 'https://api.nytimes.com/svc/topstories/v2/' + route + '.json?api-key=' + key,
