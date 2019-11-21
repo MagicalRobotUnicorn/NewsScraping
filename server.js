@@ -30,7 +30,7 @@ var hbs = exphbs.create({
                 let html = '<div class="col-2.5 sectionDiv">';
                 html += sections[i].icon;
                 html += '<h4 class="sectionHeading">' + sections[i].display + '</h4>';
-                html += '<button type="button" class="btn btn-outline-dark sectionSelection" data-route="' + sections[i].route + '">Read Section</button>';
+                html += '<button type="button" class="btn btn-outline-dark sectionSelection" id="' + sections[i].route + '">Read Section</button>';
         
                 html += '</div>';
                 ++counterVariable;
@@ -44,6 +44,25 @@ var hbs = exphbs.create({
             totalHtml += '</div>';
             
             return options.fn({totalHtml : totalHtml});
+        },
+        formatComments: function(comments){
+            let totalHtml = '';
+
+            if (comments.length !== 0){
+            for (let i = 0; i < comments.length; i++){
+                let html = '<div class="row"><div class="col-8">';
+                html += '<h5 class="author">' + comment.author + '</h5>';
+                html += '<p class="content">' + comment.content + '</p>';
+                html += '</div></div>'
+
+                totalHtml += html;
+            }
+        }
+        else {
+            html = '<div class="noComments">No Comments Exist On This Article</div>';
+            totalHtml += html;
+        }
+        return options.fn({totalHtml : totalHtml});
         }
     }
 });

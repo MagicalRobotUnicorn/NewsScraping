@@ -46,10 +46,21 @@ router.get("/section/:route", function(req, res){
       })
   });
 
-router.get("/oneSection", function(req, res){
-    const handleObject = oneSection;
-
-    res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : handleObject});
+  router.get("/individualArticle/:articleId", function(req, res){
+    let articleId = `${req.params.articleId}`;
+    axios({
+        method: 'get',
+        url: '/api/' + articleId
+  }).then((response) => {
+    let responseArray = [];
+    responseArray.push({
+        articleId : articleId,
+        comments : response
+    });
+    res.render("singleArticle", {layout: 'singleArticleLayout', handleObject : responseArray});
+  }).catch(err => {
+      console.log('error in article route is: ', err);
+  });
 });
 
 router.post("/api/:article", function(req, res){

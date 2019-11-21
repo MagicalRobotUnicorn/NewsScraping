@@ -16,7 +16,7 @@ const commentSchema = mongoose.Schema({
     //     method: 'post',
     //     url: './api/comment',
     //     data: {
-    //         poster: this.poster,
+    //         author: this.poster,
     //         articleId: this.id,
     //         text: this.text
     //     }
