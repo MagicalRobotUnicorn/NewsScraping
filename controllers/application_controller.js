@@ -12,27 +12,14 @@ const $ = require("cheerio");
 const sections = require("../public/assets/javascript/sectionData");
 const nytimes = require("../config/keys");
 
+const mongoose = require("mongoose");
+const Comment = require('../models/comment');
 
 router.get("/", function(req, res){
     const handleObject = sections;
 
     res.render("allSections", {handleObject});
 });
-
-// router.get("/section/:route", function(req, res){
-//     const route = `${req.params.route}`;
-//     console.log('https://api.nytimes.com/svc/topstories/v2/' + '.json?api-key=' + nytimes.key);
-//     axios({
-//         method: 'get',
-//         url: 'https://api.nytimes.com/svc/topstories/v2/' + route + '.json?api-key=' + nytimes.key,
-//       }).then((response) => {
-//         let cheerioObject = $(response);
-//         cheerioObject = $(cheerioObject).results;
-
-//         console.log(cheerioObject);
-
-//       });
-// });
 
 router.get("/section/:route", function(req, res){
     const route = `${req.params.route}`;
@@ -65,30 +52,22 @@ router.get("/oneSection", function(req, res){
     res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : handleObject});
 });
 
-module.exports = router;
+router.post("/api/:article", function(req, res){
+    const comment = new Comment({
+        _id: new mongoose.Types.ObjectId(),
+        author: req.body.author,
+        content: req.body.content,
+        articleId: `${req.params.article}`
+    });
+    comment
+    .save()
+    .then(result => {
+        console.log (result);
+    })
+    .catch(err => console.log(err));
 
-// var singleObject = sampleObject.results[0];
-
-// // console.log(singleObject);
-
-// var Headline =  singleObject.title;
-
-// var Author = singleObject.byline;
-
-// var Summary = singleObject.abstract;
-
-// var URL = singleObject.url;
-
-// var LargeThumb = singleObject.multimedia[1].url;
-
-// var projectObject = {
-//   Headline,
-//   Author,
-//   Summary,
-//   URL,
-//   LargeThumb
-// }
-
-// console.log (projectObject);
-
-// * Feel free to add more content to your database (photos, bylines, and so on).
+    res.status(201).json({
+        message: "Handling POST requests to /api/:article",
+        createdComment: comment
+    });
+});

@@ -10,6 +10,8 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+mongoose.connect("mongodb://127.0.0.1:27017", { useNewUrlParser: true});
+
 app.use(express.urlencoded({}));
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
