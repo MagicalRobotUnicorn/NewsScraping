@@ -71,3 +71,19 @@ router.post("/api/:article", function(req, res){
         createdComment: comment
     });
 });
+
+router.get("/api/:articleId", (req, res, next) => {
+    const id = req.params.articleId;
+    Comment.find({articleId: id})
+    .exec()
+    .then(doc => {
+        console.log(doc);
+        res.status(200).json(doc);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+});
+});
+
+module.exports = router;
