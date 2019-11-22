@@ -65,6 +65,7 @@ router.get("/section/:route", function(req, res){
 });
 
 router.post("/api/:article", function(req, res){
+    console.log(req.body);
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
         author: req.body.author,
