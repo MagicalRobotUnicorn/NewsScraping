@@ -35,12 +35,25 @@ router.get("/section/:route", function(req, res){
             author : response.data.results[i].byline,
             summary : response.data.results[i].abstract,
             url : response.data.results[i].url,
-            thumb : response.data.results[i].multimedia[1].url
+            // thumb : response.data.results[i].multimedia[1].url
+            }
+
+            if (response.data.results[i].multimedia.length !== 0){
+                individualResponse.thumb = response.data.results[i].multimedia[1].url;
+            }
+            else {
+                individualResponse.thumb = "../../public/assets/images/defaultThumb.png";
             }
             individualResponse.id = individualResponse.url.replace(/([:./])/g, '');
             responseArray.push(individualResponse);
         }
-        res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : responseArray});
+
+        // Take route to create title
+        let responseObject = {};
+        responseObject.title = route;
+
+        responseObject.responseArray = responseArray;
+        res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : responseObject});
       }).catch(err => {
         console.log('error in section route is: ', err);
       })
@@ -52,6 +65,7 @@ router.get("/section/:route", function(req, res){
         method: 'get',
         url: '/api/' + articleId
   }).then((response) => {
+
     let responseArray = [];
     responseArray.push({
         articleId : articleId,

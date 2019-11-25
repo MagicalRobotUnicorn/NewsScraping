@@ -1,41 +1,32 @@
+#titleRow {
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}
+
 #siteTitle{
-    font-size: 6em;
+    font-size: 10em;
     font-family: 'Alfa Slab One', cursive;
-    margin-left: 7%;
 }
 
 .individualArticle {
     font-family: 'Playfair Display', serif;
     width: 100%;
+    border: 1px solid black;
+    border-radius: 7px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .individualArticle.photoCol {
-    width: 30%;
     float: right;
+}
 
+.articleImage {
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
 }
 
 .individualArticle.contentCol {
     float: left;
 }
-
-/* .headline {
-
-}
-
-.author {
-
-}
-
-.summary {
-
-}
-
-.url {
-
-} */
-
- .articleImage {
-    width: 15%;
-    height: auto;
- }
