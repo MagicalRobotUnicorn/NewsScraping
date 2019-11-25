@@ -1,19 +1,26 @@
 $('.articleSelection').on("click", function(){
-    let articleId = $('this').attr('data-route');
-    const url = $('this').attr('data-url');
+    let articleId = $(this).attr('data-route');
 
-    const $totalDiv = $('div#' + articleId);
+    const url = $(this).attr('data-url');
 
-    const imageAddress = $totalDiv.find('.contentCol.articleImage').attr('src');
-    const byline = $totalDiv.find('.contentCol.byline').innerHtml();
-    const summary = $totalDiv.find('.contentCol.summary').innerHtml();
+    const $totalDiv = $('div.individualArticle#' + articleId);
+
+    console.log($totalDiv);
+
+    const imageAddress = $totalDiv.find('.photoCol img.articleImage').attr('src');
+    const headline = $totalDiv.find('.contentCol h5.headline').html();
+    const byline = $totalDiv.find('.contentCol p.byline').html();
+    const summary = $totalDiv.find('.contentCol p.summary').html();
 
     const articleObject = {
         url,
         imageAddress,
+        headline,
         byline,
         summary
     }
+
+    console.log(articleId, articleObject);
     
     $.get('/individualArticle/' + articleId, articleObject);
 });
