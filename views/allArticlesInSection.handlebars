@@ -11,10 +11,10 @@
             </div>
             <div class="col-8 contentCol">
                 <h5 class="headline">{{this.headline}}</h5>
-                <p class="author">{{this.author}}</p>
+                <p class="byline">{{this.author}}</p>
                 <p class="summary">{{this.summary}}</p>
                 <p class="url">{{this.url}}</p>
-                <button type="button" class="btn btn-outline-dark articleSelection" data-route="{{this.id}}">Explore Article</button>
+                <button type="button" class="btn btn-outline-dark articleSelection" data-route="{{this.id}}" data-url="{{this.url}}">Explore Article</button>
             </div>
         </div>
     {{/each}}

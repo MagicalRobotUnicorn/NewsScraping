@@ -69,7 +69,7 @@ router.get("/section/:route", function(req, res){
     let responseArray = [];
     responseArray.push({
         articleId : articleId,
-        articleInfo: req.body.articleInfo,
+        articleObject: req.body.articleObject,
         comments : response
     });
     res.render("singleArticle", {layout: 'singleArticleLayout', handleObject : responseArray});
