@@ -1,21 +1,29 @@
-
-
-{{#displayArticle handleObject}}
-    {{{totalHtml}}}
-{{/displayArticle}}
-
-<form>
-  <div class="form-group" action="/api/{{articleId}}">
-    <label for="author">Display Name:</label>
-    <input class="form-control" id="author" type="text" placeholder="Default input">
+<div class="row singleArticle">
+  <div class="col-4 photoCol">
+    <img src="{{articleObject.imageAddress}}" class="articleImage">
   </div>
-  <div class="form-group">
-    <label for="content">Example textarea</label>
-    <textarea class="form-control" id="content" rows="3"></textarea>>
+  <div class="col-4 photoCol">
+    <div class="col-8 contentCol">
+      <h5 class="headline">{{articleObject.headline}}</h5>
+      <p class="byline">{{articleObject.byline}}</p>
+      <p class="summary">{{articleObject.summary}}</p>
+      <button type="button" class="btn btn-outline-dark visitArticle" data-url="{{articleObject.url}}">Read
+        Article</button>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
-{{#formatComments handleObject}}
+  <form>
+    <div class="form-group" action="/api/{{articleId}}">
+      <label for="author">Display Name:</label>
+      <input class="form-control" id="author" type="text" placeholder="Default input">
+    </div>
+    <div class="form-group">
+      <label for="content">Example textarea</label>
+      <textarea class="form-control" id="content" rows="3"></textarea>>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  {{!-- {{#formatComments handleObject}}
     {{{totalHtml}}}
-{{/formatComments}}
+{{/formatComments}} --}}

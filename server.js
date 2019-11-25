@@ -47,23 +47,45 @@ var hbs = exphbs.create({
 
       return options.fn({ totalHtml: totalHtml });
     },
-    displayArticle: function(article){
-        let totalHtml = "";
-        let html = '<div class="singleArticle">';
+    displayArticle: function(articleObject, options){
 
-        html += '<img src="' + article.url + '" class="articleImage">';
-        html += '<h3 class="articleTitle">' + article.headline + '</h3>';
-        html += '<h3 class="articleAuthor">' + article.author + '</h3>';
+      // <div class="row individualArticle" id="{{this.id}}">
+      //       <div class="col-4 photoCol">
+      //           <img src="{{this.thumb}}" class="articleImage" />
+      //       </div>
+      //       <div class="col-8 contentCol">
+      //           <h5 class="headline">{{this.headline}}</h5>
+      //           <p class="byline">{{this.author}}</p>
+      //           <p class="summary">{{this.summary}}</p>
+      //           <p class="url">{{this.url}}</p>
+      //           <button type="button" class="btn btn-outline-dark articleSelection" data-route="{{this.id}}" data-url="{{this.url}}">Explore Article</button>
+      //       </div>
+      //   </div>
+
+        // let html = '<div class="row singleArticle">';
+        // html += '<div class="col-4 photoCol">';
+        // html += '<img src="' + imageAddress + '" class="articleImage">';
+        // html += '</div>';
+        // html += '<div class="col-4 photoCol">';
+        // html += '<div class="col-8 contentCol">'
+        // html += '<h5 class="headline">' + headline + '</h5>';
+        // html += '<p class="byline">' + byline + '</p>';
+        // html += '<p class="summary">' + summary + '</p>';
+        // html += '<button type="button" class="btn btn-outline-dark visitArticle" data-url="' + url + '">Read Article</button>';
+        // html += '</div>';
+        // html += '</div>';
+
+        return options.fn({ totalHtml: html });
         
-        let individualResponse = {
-            headline : response.data.results[i].title,
-            author : response.data.results[i].byline,
-            summary : response.data.results[i].abstract,
-            url : response.data.results[i].url,
-            thumb : response.data.results[i].multimedia[1].url
-            }
-            individualResponse.id = individualResponse.url.replace(/([:./])/g, '');
-            responseArray.push(individualResponse);
+        // let individualResponse = {
+        //     headline : response.data.results[i].title,
+        //     author : response.data.results[i].byline,
+        //     summary : response.data.results[i].abstract,
+        //     url : response.data.results[i].url,
+        //     thumb : response.data.results[i].multimedia[1].url
+        //     }
+        //     individualResponse.id = individualResponse.url.replace(/([:./])/g, '');
+        //     responseArray.push(individualResponse);
     },
     formatComments: function(comments) {
       let totalHtml = "";

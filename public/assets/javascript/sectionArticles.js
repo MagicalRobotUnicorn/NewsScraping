@@ -5,8 +5,6 @@ $('.articleSelection').on("click", function(){
 
     const $totalDiv = $('div.individualArticle#' + articleId);
 
-    console.log($totalDiv);
-
     const imageAddress = $totalDiv.find('.photoCol img.articleImage').attr('src');
     const headline = $totalDiv.find('.contentCol h5.headline').html();
     const byline = $totalDiv.find('.contentCol p.byline').html();
@@ -20,7 +18,11 @@ $('.articleSelection').on("click", function(){
         summary
     }
 
-    console.log(articleId, articleObject);
+    console.log(articleObject);
     
-    $.get('/individualArticle/' + articleId, articleObject);
+    $.ajax({
+        url: '/individualArticle/' + articleId,
+        data: { articleObject },
+        type: "GET"
+    });
 });
