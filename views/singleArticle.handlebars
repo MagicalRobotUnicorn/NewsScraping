@@ -24,14 +24,14 @@
   </div>
 
   {{!-- <div class="row formRow"> --}}
-  <div class="row d-flex justify-content-center" id="formRow" >
+  <div class="row d-flex justify-content-center" id="formRow">
     <form class="container" id="inputForm">
       <div class="row">
         <div class="col-3 d-flex justify-content-center">
           <i class="far fa-comments" id="commentIcon"></i>
         </div>
         <div class="col-5">
-          <div class="form-group" action="/api/{{articleId}}">
+          <div class="form-group">
             <label for="author">Display Name:</label>
             <input class="form-control" id="author" type="text" placeholder="Be creative!">
           </div>
@@ -76,31 +76,54 @@
   $('.singleArticle .contentCol button.visitArticle').attr('data-url', testObject.url);
   $('.singleArticle').attr('id', '5');
 
-  $(document).ready(function(){
-  $.ajax({
-  type: "GET",
-  url: "/api/" + $('.singleArticle').attr('id'),
-  dataType: "json",
-  success: function(comments){
-    let totalHtml = "";
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: "/api/" + $('.singleArticle').attr('id'),
+      dataType: "json",
+      success: function (comments) {
+        let totalHtml = "";
 
-      if (comments.length !== 0) {
-        for (let i = 0; i < comments.length; i++) {
-          let html = '<div class="row"><div class="col-8">';
-          html += '<h5 class="author">' + comment.author + "</h5>";
-          html += '<p class="content">' + comment.content + "</p>";
-          html += "</div></div>";
+        if (comments.length !== 0) {
+          for (let i = 0; i < comments.length; i++) {
+            let html = '<div class="row"><div class="col-8">';
+            html += '<h5 class="author">' + comments[i].author + "</h5>";
+            html += '<p class="content">' + comments[i].content + "</p>";
+            html += "</div></div>";
 
+            totalHtml += html;
+          }
+        } else {
+          html =
+            '<div class="row noComments">No Comments Exist On This Article</div>';
           totalHtml += html;
         }
-      } else {
-        html =
-          '<div class="row noComments">No Comments Exist On This Article</div>';
-        totalHtml += html;
+        $('#commentSection').html(totalHtml);
       }
-      $('#commentSection').html(totalHtml);
-  }
-})
-});
+    })
+
+    $('#inputForm').on('submit', function (e) {
+      e.preventDefault();
+
+      const returnObject = {
+        "author": $('input#author').val().trim(),
+        "content": $('textarea#content').val().trim()
+      }
+
+      $('input #author').val('');
+      $('textarea #content').val('');
+
+      console.log(returnObject);
+
+
+      $.ajax({
+        url: '/api/' + $('.singleArticle').attr('id'),
+        data: returnObject,
+        type: "POST"
+      });
+
+    });
+  });
+
 
 </script>
