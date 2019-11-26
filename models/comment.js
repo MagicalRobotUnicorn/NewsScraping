@@ -11,15 +11,4 @@ const commentSchema = mongoose.Schema({
     articleId: String
 });
 
-
-    // axios({
-    //     method: 'post',
-    //     url: './api/comment',
-    //     data: {
-    //         author: this.poster,
-    //         articleId: this.id,
-    //         text: this.text
-    //     }
-    // }).then()
-
 module.exports = mongoose.model('Comment', commentSchema);

@@ -30,7 +30,7 @@ router.get("/section/:route", function(req, res){
             author : response.data.results[i].byline,
             summary : response.data.results[i].abstract,
             url : response.data.results[i].url,
-            // thumb : response.data.results[i].multimedia[1].url
+
             }
 
             if (response.data.results[i].multimedia.length !== 0){
@@ -98,7 +98,7 @@ router.get("/api/:articleId", (req, res, next) => {
 });
 
 router.get("/testArticle", (req, res, next) => {
-    console.log(testData);
+    const handleObject = testData;
     res.render("singleArticle", {layout: 'singleArticleLayout', testData : testData });
 });
 

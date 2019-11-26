@@ -6,14 +6,16 @@
 
     {{#each handleObject.responseArray}}
         <div class="row individualArticle" id="{{this.id}}">
-            <div class="col-4 photoCol">
+            <div col="col-1"> </div>
+            <div class="col-2 photoCol">
                 <img src="{{this.thumb}}" class="articleImage" />
             </div>
+            <div class="col-1"> </div>
             <div class="col-8 contentCol">
                 <h5 class="headline">{{this.headline}}</h5>
                 <p class="byline">{{this.author}}</p>
                 <p class="summary">{{this.summary}}</p>
-                <p class="url">{{this.url}}</p>
+                {{!-- <p class="url">{{this.url}}</p> --}}
                 <button type="button" class="btn btn-outline-dark articleSelection" data-route="{{this.id}}" data-url="{{this.url}}">Explore Article</button>
             </div>
         </div>

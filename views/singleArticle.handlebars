@@ -2,15 +2,14 @@
   <div class="col-4 photoCol">
     <img src="{{articleObject.imageAddress}}" class="articleImage">
   </div>
-  <div class="col-4 photoCol">
-    <div class="col-8 contentCol">
+  <div class="col-8 contentCol">
       <h5 class="headline">{{articleObject.headline}}</h5>
       <p class="byline">{{articleObject.byline}}</p>
       <p class="summary">{{articleObject.summary}}</p>
       <button type="button" class="btn btn-outline-dark visitArticle" data-url="{{articleObject.url}}">Read
         Article</button>
-    </div>
   </div>
+  
 
   <form>
     <div class="form-group" action="/api/{{articleId}}">
@@ -19,11 +18,27 @@
     </div>
     <div class="form-group">
       <label for="content">Example textarea</label>
-      <textarea class="form-control" id="content" rows="3"></textarea>>
+      <textarea class="form-control" id="content" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
+<script>
+  const testObject = {
+  url:
+    'https://www.nytimes.com/2019/11/24/movies/best-movies-2010s-decade.html',
+  imageAddress:
+    'https://static01.nyt.com/images/2019/11/25/arts/25-decadefilms-grid/25-decadefilms-grid-thumbLarge-v2.jpg',
+  headline:
+    'The 10 Most Influential Films of the Decade (and 20 Other Favorites)',
+  byline: 'By MANOHLA DARGIS and A.O. SCOTT',
+  summary:
+    'Our co-chief film critics say these were the films of the 2010s that made a difference in the world of entertainment and beyond.'
+}
+
+$('.singleArticle.photoCol ')
+
+</script>
   {{!-- {{#formatComments handleObject}}
     {{{totalHtml}}}
 {{/formatComments}} --}}
