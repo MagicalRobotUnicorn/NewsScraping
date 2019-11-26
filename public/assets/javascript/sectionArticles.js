@@ -5,6 +5,7 @@ $('.articleSelection').on("click", function(){
 
     const $totalDiv = $('div.individualArticle#' + articleId);
 
+    const articleId = $(this).attr('id');
     const imageAddress = $totalDiv.find('.photoCol img.articleImage').attr('src');
     const headline = $totalDiv.find('.contentCol h5.headline').html();
     const byline = $totalDiv.find('.contentCol p.byline').html();
@@ -15,7 +16,8 @@ $('.articleSelection').on("click", function(){
         imageAddress,
         headline,
         byline,
-        summary
+        summary,
+        articleId
     }
     
     $.ajax({

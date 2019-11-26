@@ -1,0 +1,75 @@
+#titleRow {
+  border-bottom: 1px solid grey;
+  margin-bottom: 20px;
+}
+
+#siteTitle{
+  font-size: 6em;
+  font-family: 'Alfa Slab One', cursive;
+}
+
+.singleArticle {
+  font-family: 'Playfair Display', serif;
+  /* width: 80%; */
+  border: 1px solid black;
+  border-radius: 7px;
+  margin-top: 10px;
+  /* margin-left: 2%; */
+  padding: 10px;
+}
+
+#disclaimerRow {
+  font-family: 'Playfair Display', serif;
+  border: 1px solid black;
+  border-radius: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#disclaimer {
+  margin-top: 10px;
+}
+
+.articleImage {
+  margin-top: 7%;
+  height: 120%;
+  width: auto;
+  border-radius: 7px;
+}
+
+.photoCol {
+  margin-bottom: 5%;
+}
+
+.singleArticle.contentCol {
+  float: left;
+}
+
+#commentIcon {
+  font-size: 10em;
+}
+
+#formRow {
+  font-family: 'Playfair Display', serif;
+  border: 1px solid black;
+  border-radius: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 103%;
+}
+
+#inputForm {
+  margin-left: 25%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#commentIcon {
+  margin-top: 15%;
+}
+
+#commentSubmit {
+  width: 100%;
+  margin-top: 10px;
+}

@@ -1,44 +1,106 @@
-<div class="row singleArticle">
-  <div class="col-4 photoCol">
-    <img src="{{articleObject.imageAddress}}" class="articleImage">
+<div class="container">
+  <div class="row d-flex justify-content-center" id="titleRow">
+    <h1 id="siteTitle">read and comment.</h1>
   </div>
-  <div class="col-8 contentCol">
+
+  {{!-- Make sure to insert id from the request here --}}
+  <div class="row singleArticle" id="{{articleObject.articleId}}">
+    <div class="col-1"> </div>
+    <div class="col-2 photoCol">
+      <img src="{{articleObject.imageAddress}}" class="articleImage">
+    </div>
+    <div class="col-1"></div>
+    <div class="col-8 contentCol">
       <h5 class="headline">{{articleObject.headline}}</h5>
       <p class="byline">{{articleObject.byline}}</p>
       <p class="summary">{{articleObject.summary}}</p>
       <button type="button" class="btn btn-outline-dark visitArticle" data-url="{{articleObject.url}}">Read
         Article</button>
+    </div>
   </div>
-  
 
-  <form>
-    <div class="form-group" action="/api/{{articleId}}">
-      <label for="author">Display Name:</label>
-      <input class="form-control" id="author" type="text" placeholder="Default input">
-    </div>
-    <div class="form-group">
-      <label for="content">Example textarea</label>
-      <textarea class="form-control" id="content" rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <div class="row d-flex justify-content-center" id="disclaimerRow">
+    <p id="disclaimer">PLEASE NOTE: Disrespectful or offensive comments will be removed by moderators.</p>
+  </div>
+
+  {{!-- <div class="row formRow"> --}}
+  <div class="row d-flex justify-content-center" id="formRow" >
+    <form class="container" id="inputForm">
+      <div class="row">
+        <div class="col-3 d-flex justify-content-center">
+          <i class="far fa-comments" id="commentIcon"></i>
+        </div>
+        <div class="col-5">
+          <div class="form-group" action="/api/{{articleId}}">
+            <label for="author">Display Name:</label>
+            <input class="form-control" id="author" type="text" placeholder="Be creative!">
+          </div>
+          <div class="form-group">
+            <label for="content">Your Comment:</label>
+            <textarea class="form-control" id="content" rows="5"
+              placeholder="Be insightful... say something original or say it in an original way!"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <button type="submit" class="btn btn-outline-dark" id="commentSubmit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="commentSection">
+    {{!-- Information from API Call goes here --}}
+  </div>
+</div>
 
 <script>
   const testObject = {
-  url:
-    'https://www.nytimes.com/2019/11/24/movies/best-movies-2010s-decade.html',
-  imageAddress:
-    'https://static01.nyt.com/images/2019/11/25/arts/25-decadefilms-grid/25-decadefilms-grid-thumbLarge-v2.jpg',
-  headline:
-    'The 10 Most Influential Films of the Decade (and 20 Other Favorites)',
-  byline: 'By MANOHLA DARGIS and A.O. SCOTT',
-  summary:
-    'Our co-chief film critics say these were the films of the 2010s that made a difference in the world of entertainment and beyond.'
-}
+    url:
+      'https://www.nytimes.com/2019/11/24/movies/best-movies-2010s-decade.html',
+    imageAddress:
+      'https://static01.nyt.com/images/2019/11/25/arts/25-decadefilms-grid/25-decadefilms-grid-thumbLarge-v2.jpg',
+    headline:
+      'The 10 Most Influential Films of the Decade (and 20 Other Favorites)',
+    byline: 'By MANOHLA DARGIS and A.O. SCOTT',
+    summary:
+      'Our co-chief film critics say these were the films of the 2010s that made a difference in the world of entertainment and beyond.',
+    articleId:
+      '5'
+  }
 
-$('.singleArticle.photoCol ')
+  $('.singleArticle .photoCol img.articleImage').attr('src', testObject.imageAddress);
+  $('.singleArticle .contentCol h5.headline').html(testObject.headline);
+  $('.singleArticle .contentCol p.byline').html(testObject.byline);
+  $('.singleArticle .contentCol p.summary').html(testObject.summary);
+  $('.singleArticle .contentCol button.visitArticle').attr('data-url', testObject.url);
+  $('.singleArticle').attr('id', '5');
+
+  $(document).ready(function(){
+  $.ajax({
+  type: "GET",
+  url: "/api/" + $('.singleArticle').attr('id'),
+  dataType: "json",
+  success: function(comments){
+    let totalHtml = "";
+
+      if (comments.length !== 0) {
+        for (let i = 0; i < comments.length; i++) {
+          let html = '<div class="row"><div class="col-8">';
+          html += '<h5 class="author">' + comment.author + "</h5>";
+          html += '<p class="content">' + comment.content + "</p>";
+          html += "</div></div>";
+
+          totalHtml += html;
+        }
+      } else {
+        html =
+          '<div class="row noComments">No Comments Exist On This Article</div>';
+        totalHtml += html;
+      }
+      $('#commentSection').html(totalHtml);
+  }
+})
+});
 
 </script>
-  {{!-- {{#formatComments handleObject}}
-    {{{totalHtml}}}
-{{/formatComments}} --}}

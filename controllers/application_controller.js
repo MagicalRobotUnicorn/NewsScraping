@@ -4,7 +4,7 @@ const axios = require("axios");
 const $ = require("cheerio");
 
 const sections = require("../public/assets/javascript/sectionData");
-const testData = require("../public/assets/javascript/singleArticle");
+// const testData = require("../public/assets/javascript/singleArticle");
 const nytimes = require("../config/keys");
 
 const mongoose = require("mongoose");
@@ -88,18 +88,18 @@ router.get("/api/:articleId", (req, res, next) => {
     Comment.find({articleId: id})
     .exec()
     .then(doc => {
-        console.log(doc);
+        // console.log(doc);
         res.status(200).json(doc);
     })
     .catch(err => {
-        console.log(err);
+        // console.log(err);
         res.status(500).json({error: err});
 });
 });
 
 router.get("/testArticle", (req, res, next) => {
-    const handleObject = testData;
-    res.render("singleArticle", {layout: 'singleArticleLayout', testData : testData });
+    // const handleObject = testData;
+    res.render("singleArticle", {layout: 'singleArticleLayout' });
 });
 
 module.exports = router;
