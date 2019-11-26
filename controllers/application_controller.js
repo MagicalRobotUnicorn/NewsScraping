@@ -88,11 +88,9 @@ router.get("/api/:articleId", (req, res, next) => {
     Comment.find({articleId: id})
     .exec()
     .then(doc => {
-        // console.log(doc);
         res.status(200).json(doc);
     })
     .catch(err => {
-        // console.log(err);
         res.status(500).json({error: err});
 });
 });

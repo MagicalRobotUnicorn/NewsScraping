@@ -49,7 +49,7 @@
       </div>
     </form>
   </div>
-  <div id="commentSection">
+  <div id="commentSection" class="row d-flex justify-content-center">
     {{!-- Information from API Call goes here --}}
   </div>
 </div>
@@ -82,25 +82,32 @@
       url: "/api/" + $('.singleArticle').attr('id'),
       dataType: "json",
       success: function (comments) {
-        let totalHtml = "";
+        let totalHtml = '';
 
         if (comments.length !== 0) {
+          totalHtml += '<div class="container" id="commentsExist">';
+          totalHtml += '<div class="row commentHeading">';
+          totalHtml += '<div class="col-4"><h5>Comment Author</h5></div>';
+          totalHtml += '<div class="col-6"><h5>Comment Content</p></div>';
+          totalHtml += "</div>";
           for (let i = 0; i < comments.length; i++) {
-            let html = '<div class="row"><div class="col-8">';
-            html += '<h5 class="author">' + comments[i].author + "</h5>";
-            html += '<p class="content">' + comments[i].content + "</p>";
-            html += "</div></div>";
+            let html = '<div class="row postedComment">';
+            html += '<div class="col-3"><h5 class="author">' + comments[i].author + "</h5></div>";
+            html += '<div class="col-6"><p class="content">' + comments[i].content + "</p></div>";
+            html += "</div>";
 
             totalHtml += html;
           }
+          totalHtml += '</div>';
         } else {
           html =
-            '<div class="row noComments">No Comments Exist On This Article</div>';
+            '<div class="row"><div class="col-12 noComments d-flex justify-content-center">No comments exist on this article... You should post one!</div></div>';
           totalHtml += html;
         }
+
         $('#commentSection').html(totalHtml);
       }
-    })
+    });
 
     $('#inputForm').on('submit', function (e) {
       e.preventDefault();
@@ -112,9 +119,6 @@
 
       $('input #author').val('');
       $('textarea #content').val('');
-
-      console.log(returnObject);
-
 
       $.ajax({
         url: '/api/' + $('.singleArticle').attr('id'),
