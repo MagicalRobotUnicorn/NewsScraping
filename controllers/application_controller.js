@@ -1,15 +1,10 @@
-// On NYT Route, find all categories
-// On click of category, display results from Api
-
-// Get and post routing for comments
-// Both routes will take the address of the article as the table name
-
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const $ = require("cheerio");
 
 const sections = require("../public/assets/javascript/sectionData");
+const testData = require("../public/assets/javascript/singleArticle");
 const nytimes = require("../config/keys");
 
 const mongoose = require("mongoose");
@@ -59,27 +54,12 @@ router.get("/section/:route", function(req, res){
       })
   });
 
-  router.get("/individualArticle/:articleId", function(req, res){
+  router.post("/individualArticle/:articleId", function(req, res){
     let articleId = `${req.params.articleId}`;
-//     axios({
-//         method: 'get',
-//         url: '/api/' + articleId
-//   }).then((response) => {
 
-    // let responseArray = [];
-    // responseArray.push({
-    //     articleId : articleId,
-    //     articleObject: req.body.articleObject,
-    //     comments : response
-    // });
+    let returnObject = req.body.articleObject;
 
-    console.log("Got Here");
-    console.log(req.body);
-
-    res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : req.body.articleObject});
-//   }).catch(err => {
-//       console.log('error in article route is: ', err);
-//   });
+    res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : returnObject});
   });
 
 router.post("/api/:article", function(req, res){
@@ -115,6 +95,11 @@ router.get("/api/:articleId", (req, res, next) => {
         console.log(err);
         res.status(500).json({error: err});
 });
+});
+
+router.get("/testArticle", (req, res, next) => {
+    console.log(testData);
+    res.render("singleArticle", {layout: 'singleArticleLayout', testData : testData });
 });
 
 module.exports = router;

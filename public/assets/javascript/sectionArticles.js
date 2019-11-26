@@ -17,12 +17,10 @@ $('.articleSelection').on("click", function(){
         byline,
         summary
     }
-
-    console.log(articleObject);
     
     $.ajax({
         url: '/individualArticle/' + articleId,
         data: { articleObject },
-        type: "GET"
+        type: "POST"
     });
 });
