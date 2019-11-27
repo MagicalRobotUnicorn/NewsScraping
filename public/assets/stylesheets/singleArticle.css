@@ -104,7 +104,8 @@
 } */
 
 .noComments {
-  background-color: grey;
-  border: 1px solid black;
-  border-radius: 7px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-family: 'Playfair Display', serif;
 }

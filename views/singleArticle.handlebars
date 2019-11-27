@@ -14,7 +14,7 @@
       <h5 class="headline">{{articleObject.headline}}</h5>
       <p class="byline">{{articleObject.byline}}</p>
       <p class="summary">{{articleObject.summary}}</p>
-      <button type="button" class="btn btn-outline-dark visitArticle" data-url="{{articleObject.url}}">Read
+      <button type="button" class="btn btn-outline-dark visitArticle" onclick="parent.open('{{articleObject.url}}')">Read
         Article</button>
     </div>
   </div>
@@ -75,6 +75,7 @@
   $('.singleArticle .contentCol p.summary').html(testObject.summary);
   $('.singleArticle .contentCol button.visitArticle').attr('data-url', testObject.url);
   $('.singleArticle').attr('id', '5');
+  $('.visitArticle').attr('onclick', onclick="parent.open('" + testObject.url+ "')");
 
   $(document).ready(function () {
     $.ajax({
@@ -101,7 +102,7 @@
           totalHtml += '</div>';
         } else {
           html =
-            '<div class="row"><div class="col-12 noComments d-flex justify-content-center">No comments exist on this article... You should post one!</div></div>';
+            '<div class="row"><div class="col-12 noComments d-flex justify-content-center"><h5>No comments exist on this article... You should post one!</h5></div></div>';
           totalHtml += html;
         }
 
