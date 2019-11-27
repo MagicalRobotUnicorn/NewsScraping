@@ -14,7 +14,8 @@
       <h5 class="headline">{{articleObject.headline}}</h5>
       <p class="byline">{{articleObject.byline}}</p>
       <p class="summary">{{articleObject.summary}}</p>
-      <button type="button" class="btn btn-outline-dark visitArticle" onclick="parent.open('{{articleObject.url}}')">Read
+      <button type="button" class="btn btn-outline-dark visitArticle"
+        onclick="parent.open('{{articleObject.url}}')">Read
         Article</button>
     </div>
   </div>
@@ -68,47 +69,77 @@
     articleId:
       '5'
   }
-
+/*
   $('.singleArticle .photoCol img.articleImage').attr('src', testObject.imageAddress);
   $('.singleArticle .contentCol h5.headline').html(testObject.headline);
   $('.singleArticle .contentCol p.byline').html(testObject.byline);
   $('.singleArticle .contentCol p.summary').html(testObject.summary);
   $('.singleArticle .contentCol button.visitArticle').attr('data-url', testObject.url);
   $('.singleArticle').attr('id', '5');
-  $('.visitArticle').attr('onclick', onclick="parent.open('" + testObject.url+ "')");
+  $('.visitArticle').attr('onclick', onclick = "parent.open('" + testObject.url + "')");
+  */
 
   $(document).ready(function () {
+    let path = window.location.pathname;
+    path = path.replace(/\$/, "");
+    path = path.split("/");
+    path = path[path.length - 1];
+
+    let articleId = path;
+
     $.ajax({
+      url: '/api/article/' + articleId,
       type: "GET",
-      url: "/api/" + $('.singleArticle').attr('id'),
-      dataType: "json",
-      success: function (comments) {
-        let totalHtml = '';
+      success: (response) => {
+        console.log("Image Address", response[0].imageAddress);
+        console.log("Image Address", response.byline);
+        console.log("Image Address", response.headline);
+        console.log("Image Address", response.imageAddress);
 
-        if (comments.length !== 0) {
-          totalHtml += '<div class="container" id="commentsExist">';
-          totalHtml += '<div class="row commentHeading">';
-          totalHtml += '<div class="col-4"><h5>Comment Author</h5></div>';
-          totalHtml += '<div class="col-6"><h5>Comment Content</p></div>';
-          totalHtml += "</div>";
-          for (let i = 0; i < comments.length; i++) {
-            let html = '<div class="row postedComment">';
-            html += '<div class="col-3"><h5 class="author">' + comments[i].author + "</h5></div>";
-            html += '<div class="col-6"><p class="content">' + comments[i].content + "</p></div>";
-            html += "</div>";
-
-            totalHtml += html;
-          }
-          totalHtml += '</div>';
-        } else {
-          html =
-            '<div class="row"><div class="col-12 noComments d-flex justify-content-center"><h5>No comments exist on this article... You should post one!</h5></div></div>';
-          totalHtml += html;
-        }
-
-        $('#commentSection').html(totalHtml);
+        // res.render("singleArticle", { layout: 'singleArticleLayout', articleObject: response });
+        $('.singleArticle .photoCol img.articleImage').attr('src', response[0].imageAddress);
+        $('.singleArticle .contentCol h5.headline').html(response[0].headline);
+        $('.singleArticle .contentCol p.byline').html(response[0].byline);
+        $('.singleArticle .contentCol p.summary').html(response[0].summary);
+        $('.singleArticle .contentCol button.visitArticle').attr('data-url', response[0].url);
+        $('.singleArticle').attr('id', articleId);
+        $('.visitArticle').attr('onclick', onclick = "parent.open('" + response[0].url + "')");
       }
-    });
+    })
+      .catch(error => {
+        console.log(error);
+      }).then(
+        $.ajax({
+          type: "GET",
+          url: "/api/" + articleId,
+          dataType: "json",
+          success: function (comments) {
+            let totalHtml = '';
+
+            if (comments.length !== 0) {
+              totalHtml += '<div class="container" id="commentsExist">';
+              totalHtml += '<div class="row commentHeading">';
+              totalHtml += '<div class="col-4"><h5>Comment Author</h5></div>';
+              totalHtml += '<div class="col-6"><h5>Comment Content</p></div>';
+              totalHtml += "</div>";
+              for (let i = 0; i < comments.length; i++) {
+                let html = '<div class="row postedComment">';
+                html += '<div class="col-3"><h5 class="author">' + comments[i].author + "</h5></div>";
+                html += '<div class="col-6"><p class="content">' + comments[i].content + "</p></div>";
+                html += "</div>";
+
+                totalHtml += html;
+              }
+              totalHtml += '</div>';
+            } else {
+              html =
+                '<div class="row"><div class="col-12 noComments d-flex justify-content-center"><h5>No comments exist on this article... You should post one!</h5></div></div>';
+              totalHtml += html;
+            }
+
+            $('#commentSection').html(totalHtml);
+          }
+        }));
 
     $('#inputForm').on('submit', function (e) {
       e.preventDefault();
@@ -129,6 +160,5 @@
 
     });
   });
-
 
 </script>

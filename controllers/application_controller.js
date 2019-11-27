@@ -54,16 +54,17 @@ router.get("/section/:route", function(req, res){
   });
 
   router.get("/individualArticle/:articleId", function(req, res){
-    let articleId = `${req.params.articleId}`;
+    // let articleId = `${req.params.articleId}`;
 
-    axios.get('./api/article/' + articleId)
-    .then(response => {
-        console.log(response);
-        res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : response});
-    })
-    .catch(error => {
-        console.log(error);
-    })
+    // axios.get('./api/article/' + articleId)
+    // .then(response => {
+    //     console.log(response);
+    //     res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : response});
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+    res.render("singleArticle", {layout: 'singleArticleLayout' });
   });
 
 router.post("/api/article/:article", function(req, res){
