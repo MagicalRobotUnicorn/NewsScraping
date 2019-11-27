@@ -5,7 +5,6 @@ $('.articleSelection').on("click", function(){
 
     const $totalDiv = $('div.individualArticle#' + articleId);
 
-    const articleId = $(this).attr('id');
     const imageAddress = $totalDiv.find('.photoCol img.articleImage').attr('src');
     const headline = $totalDiv.find('.contentCol h5.headline').html();
     const byline = $totalDiv.find('.contentCol p.byline').html();
@@ -19,10 +18,28 @@ $('.articleSelection').on("click", function(){
         summary,
         articleId
     }
-    
+
+    // window.location.href = '/individualArticle/' + articleId;
+
     $.ajax({
-        url: '/individualArticle/' + articleId,
-        data: { articleObject },
-        type: "POST"
+        url: '/api/article/' + articleId,
+        data: articleObject,
+        type: "GET",
+        success: (response) => {
+            if (response.length === 0){
+                $.ajax({
+                    url: '/api/article/' + articleId,
+                    data: articleObject,
+                    type: "POST",
+                    success: function(response){
+                        console.log(response);
+                        window.location.href = '/individualArticle/' + articleId;
+                    }
+                });
+            }
+            else {
+                window.location.href = '/individualArticle/' + articleId;
+            }
+        }
     });
 });

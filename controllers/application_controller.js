@@ -4,11 +4,11 @@ const axios = require("axios");
 const $ = require("cheerio");
 
 const sections = require("../public/assets/javascript/sectionData");
-// const testData = require("../public/assets/javascript/singleArticle");
 const nytimes = require("../config/keys");
 
 const mongoose = require("mongoose");
 const Comment = require('../models/comment');
+const Article = require('../models/article');
 
 router.get("/", function(req, res){
     const handleObject = sections;
@@ -30,7 +30,6 @@ router.get("/section/:route", function(req, res){
             author : response.data.results[i].byline,
             summary : response.data.results[i].abstract,
             url : response.data.results[i].url,
-
             }
 
             if (response.data.results[i].multimedia.length !== 0){
@@ -51,19 +50,60 @@ router.get("/section/:route", function(req, res){
         res.render("allArticlesInSection", {layout: 'allArticlesInSectionLayout', handleObject : responseObject});
       }).catch(err => {
         console.log('error in section route is: ', err);
-      })
+      });
   });
 
-  router.post("/individualArticle/:articleId", function(req, res){
+  router.get("/individualArticle/:articleId", function(req, res){
     let articleId = `${req.params.articleId}`;
 
-    let returnObject = req.body.articleObject;
-
-    res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : returnObject});
+    axios.get('./api/article/' + articleId)
+    .then(response => {
+        console.log(response);
+        res.render("singleArticle", {layout: 'singleArticleLayout', articleObject : response});
+    })
+    .catch(error => {
+        console.log(error);
+    })
   });
 
+router.post("/api/article/:article", function(req, res){
+    const article = new Article({
+        _id: new mongoose.Types.ObjectId(),
+        url: req.body.url,
+        imageAddress: req.body.imageAddress,
+        articleId: `${req.params.article}`,
+        summary: req.body.summary,
+        headline: req.body.headline,
+        byline: req.body.byline
+    });
+    article
+    .save()
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => console.log(err));
+
+    res.status(201).json({
+        message: "Handling POST requests to /api/article/:article",
+        createdArticle: article
+    });
+});
+
+router.get("/api/article/:article", function(req, res){
+    // console.log(req.body);
+    const id = req.params.article;
+    Article.find({articleId: id})
+    .exec()
+    .then(doc => {
+        res.status(200).json(doc);
+    })
+    .catch(err => {
+        res.status(500).json({error: err});
+});
+});
+
 router.post("/api/:article", function(req, res){
-    console.log(req.body);
+
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
         author: req.body.author,
