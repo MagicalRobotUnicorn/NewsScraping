@@ -4,13 +4,14 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const nytimes = require("./config/keys");
+const keys = require("./config/keys");
 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect("mongodb://127.0.0.1:27017", { useNewUrlParser: true });
+
+mongoose.connect("mongodb://" + keys.mongouser + ":" + keys.mongopass + "@ds349628.mlab.com:49628/heroku_jfvw9jl2", { useNewUrlParser: true });
 
 app.use(express.urlencoded({}));
 app.use(express.json());
@@ -45,30 +46,6 @@ var hbs = exphbs.create({
       }
       totalHtml += "</div>";
 
-      return options.fn({ totalHtml: totalHtml });
-    },
-    displayArticle: function(articleObject, options){
-
-        return options.fn({ totalHtml: html });
-
-    },
-    formatComments: function(comments) {
-      let totalHtml = "";
-
-      if (comments.length !== 0) {
-        for (let i = 0; i < comments.length; i++) {
-          let html = '<div class="row"><div class="col-8">';
-          html += '<h5 class="author">' + comment.author + "</h5>";
-          html += '<p class="content">' + comment.content + "</p>";
-          html += "</div></div>";
-
-          totalHtml += html;
-        }
-      } else {
-        html =
-          '<div class="noComments">No Comments Exist On This Article</div>';
-        totalHtml += html;
-      }
       return options.fn({ totalHtml: totalHtml });
     }
   }

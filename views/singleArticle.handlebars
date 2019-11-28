@@ -69,15 +69,6 @@
     articleId:
       '5'
   }
-/*
-  $('.singleArticle .photoCol img.articleImage').attr('src', testObject.imageAddress);
-  $('.singleArticle .contentCol h5.headline').html(testObject.headline);
-  $('.singleArticle .contentCol p.byline').html(testObject.byline);
-  $('.singleArticle .contentCol p.summary').html(testObject.summary);
-  $('.singleArticle .contentCol button.visitArticle').attr('data-url', testObject.url);
-  $('.singleArticle').attr('id', '5');
-  $('.visitArticle').attr('onclick', onclick = "parent.open('" + testObject.url + "')");
-  */
 
   $(document).ready(function () {
     let path = window.location.pathname;
@@ -85,18 +76,13 @@
     path = path.split("/");
     path = path[path.length - 1];
 
-    let articleId = path;
+    const articleId = path;
 
     $.ajax({
       url: '/api/article/' + articleId,
       type: "GET",
       success: (response) => {
-        console.log("Image Address", response[0].imageAddress);
-        console.log("Image Address", response.byline);
-        console.log("Image Address", response.headline);
-        console.log("Image Address", response.imageAddress);
 
-        // res.render("singleArticle", { layout: 'singleArticleLayout', articleObject: response });
         $('.singleArticle .photoCol img.articleImage').attr('src', response[0].imageAddress);
         $('.singleArticle .contentCol h5.headline').html(response[0].headline);
         $('.singleArticle .contentCol p.byline').html(response[0].byline);
